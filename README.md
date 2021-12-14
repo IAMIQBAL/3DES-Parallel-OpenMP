@@ -1,1 +1,1 @@
-3DES-Parallel-OpenMP
+Parallel implementation of 3DES
