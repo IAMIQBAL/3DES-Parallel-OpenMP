@@ -22,7 +22,7 @@ string leftShift(int nshifts, string input){
 string opXOR(string inp1, string inp2){
     string tmp = "";
     for (int i = 0; i < inp1.size(); i++){
-        if (inp1[i] = inp2[i]){
+        if (inp1[i] == inp2[i]){
             tmp += "0";
         } else {
             tmp += "1";
@@ -115,6 +115,15 @@ vector<string> readFile(string fName){
     for (int i = 0; i < data.length(); i += 8){
         dataVec.push_back(data.substr(i, 8));
     }
-
+    input.close();
     return dataVec;
+}
+
+void writeFile(string fName, vector<string> data){
+    ofstream output;
+    output.open(fName, ios::app);
+    for (int i = 0; i < data.size(); i++){
+        output << data[i];
+    }
+    output.close();
 }
