@@ -3,16 +3,19 @@
 #include <vector>
 #include "constants.h"
 #include "misc.h"
+#include <omp.h>
 
 using namespace std;
 
-class SerialDES {
+class SboxParallel {
 private:
     string key; // 64 bit key
+    int threads;
 
 public:
-    SerialDES(string key){
+    SboxParallel(string key, int threads){
         this->key = key;
+        this->threads = threads;
     }
 
     vector<string> generateKeys(){
@@ -44,11 +47,17 @@ public:
 
             string sbOut[8];
             string output = "";
+            int *x = new int[8];
+            int *y = new int[8];
+            int *z = new int[8];
+
+            #pragma omp parallel for num_threads(threads) schedule(static)
             for (int i = 0; i < 8; i++){
-                int row = 2 * int(XOR[i * 6] - '0') + int(XOR[i * 6 + 5] - '0'); 
-                int col = 8 * int(XOR[i * 6 + 1] - '0') + 4 * int(XOR[i * 6 + 2] - '0') + 2 * int(XOR[i * 6 + 3] - '0') + int(XOR[i * 6 + 4] - '0');
-                int val = sBox[i][row][col];
-                sbOut[i] = decToBin(val);
+                int tid = omp_get_thread_num();
+                x[tid] = 2 * int(XOR[tid * 6] - '0') + int(XOR[tid * 6 + 5] - '0'); 
+                y[tid] = 8 * int(XOR[tid * 6 + 1] - '0') + 4 * int(XOR[tid * 6 + 2] - '0') + 2 * int(XOR[tid * 6 + 3] - '0') + int(XOR[tid * 6 + 4] - '0');
+                z[tid] = sBox[tid][x[tid]][y[tid]];
+                sbOut[tid] = decToBin(z[tid]);
             }
             for (int i = 0; i < 8; i++) output += sbOut[i];
             output = permutation(pbox, 32, output);

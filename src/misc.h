@@ -119,6 +119,19 @@ vector<string> readFile(string fName){
     return dataVec;
 }
 
+vector<string> getBlock(string data){
+    vector<string> dataVec;
+    while (data.length() % 8 != 0){
+        data += " ";
+    }
+
+    for (int i = 0; i < data.length(); i += 8){
+        dataVec.push_back(data.substr(i, 8));
+    }
+
+    return dataVec;
+}
+
 void writeFile(string fName, vector<string> data){
     ofstream output;
     output.open(fName, ios::app);
@@ -126,4 +139,19 @@ void writeFile(string fName, vector<string> data){
         output << data[i];
     }
     output.close();
+}
+
+void writeFileStr(string fName, string* data, int size){
+    ofstream output;
+    output.open(fName, ios::app);
+    for (int i = 0; i < size; i++){
+        output << data[i];
+    }
+    output.close();
+}
+
+void printVec(vector<string> vec){
+    for (int i = 0; i < vec.size(); i++){
+        cout << vec[i] << endl;
+    }
 }

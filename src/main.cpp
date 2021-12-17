@@ -1,82 +1,78 @@
 #include <iostream>
 #include <string>
 #include <vector>
-// #include "Serial.h"
-#include "Parallel.h"
+#include <omp.h>
+#include "P3DES.h"
+// #include "S3DES.h"
 
 using namespace std;
 
 int main(){
 
-    // Serial
-
-    // SerialDES *sd = new SerialDES(key);
-    // vector<string> genKeys = sd->generateKeys();
+    // 3DES Parallel
+    int threads = 8;
     string fName = "../tests/plaintext.txt";
-
     vector<string> text = readFile(fName);
-    // cout << "Input: ";
-    // for (int i = 0; i < text.size(); i++){
-    //     cout << text[i] << endl;
+    int size = text.size();
+    string* data = new string[size];
+    for (int i = 0; i < size; i++){
+        data[i] = text[i];
+        // cout << data[i];
+    }
+    // cout << endl;
+    
+
+    string k1 = "ABC12532110EDA56";
+    string k2 = "ABC12532110EDA57";
+    string k3 = "ABC12532110EDA90";
+    cout << "File Read Complete..." << endl;
+    P3DES *d3 = new P3DES(k1, k2, k3, threads, size, 1);
+    string *enc = new string[size];
+    enc = d3->pEncryptNested(data);
+    writeFileStr("enc.txt", enc, size);
+
+    cout << "Decrypted " << endl;
+    P3DES *d3_2 = new P3DES(k1, k2, k3, threads, size, 1);
+    string *plain = new string[size];
+    plain = d3_2->pDecryptNested(enc);
+
+    string result = "";
+    for (int i = 0; i < size; i++){
+        result += plain[i];
+    }
+    cout << result;
+    cout << endl;
+
+    // 3DES Serial
+    // string fName = "../tests/bible.txt";
+    // vector<string> text = readFile(fName);
+    // int size = text.size();
+    // string* data = new string[size];
+    // for (int i = 0; i < size; i++){
+    //     data[i] = text[i];
+    //     // cout << data[i];
     // }
-    vector<string> cipherText;
-    string *cipher = new string[text.size()];
-    // for (int i = 0; i < text.size(); i++){
-    //     cipher[i] = sd->encrypt(text[i], genKeys);
+    // // cout << endl;
+    
+
+    // string k1 = "ABC12532110EDA56";
+    // string k2 = "ABC12532110EDA57";
+    // string k3 = "ABC12532110EDA90";
+    // cout << "File Read Complete..." << endl;
+    // S3DES *d3 = new S3DES(k1, k2, k3, size);
+    // string *enc = new string[size];
+    // enc = d3->pEncrypt(data);
+    // writeFileStr("enc.txt", enc, size);
+
+    // cout << "Decrypted " << endl;
+    // S3DES *d3_2 = new S3DES(k1, k2, k3, size);
+    // string *plain = new string[size];
+    // plain = d3_2->pDecrypt(enc);
+
+    // string result = "";
+    // for (int i = 0; i < size; i++){
+    //     result += plain[i];
     // }
-
-    // cout << "Encrypted: " << cipher << endl;
-    // for (int i = 0; i < text.size(); i++){
-    //     cipherText.push_back(cipher[i]);
-    // }
-
-    // writeFile("enc.txt", cipherText);
-
-    // for (int i = 0; i < cipherText.size(); i++){
-	// 	cout << "Encrypted: " << cipherText[i] << endl;
-	// }
-
-    // reverse(genKeys.begin(), genKeys.end());
-    // string decrypted;
-    // string dec[cipherText.size()];
-    // for (int i = 0; i < cipherText.size(); i++){
-    //     dec[i] = sd->encrypt(cipherText[i], genKeys);
-    // }
-
-    // for (int i = 0; i < cipherText.size(); i++){
-    //     decrypted += dec[i];
-    // }
-
-    // cout << "Decrypted: " << decrypted << endl;
-
-    // Parallel
-
-    // Parallel *pd = new Parallel(key);
-    // vector<string> genKeys = pd->pGenerateKeys();
-
-	// double Et1 = omp_get_wtime();
-    // cipher = pd->pEncrypt(text, genKeys);
-	// double Et2 = omp_get_wtime();
-
-    // for (int i = 0; i < text.size(); i++){
-    //     cipherText.push_back(cipher[i]);
-    // }
-
-    // writeFile("enc.txt", cipherText);
-
-    // reverse(genKeys.begin(), genKeys.end());
-    // string decrypted;
-    // string *dec = new string[cipherText.size()];
-
-	// double Dt1 = omp_get_wtime();
-    // dec = pd->pEncrypt(cipherText, genKeys);
-	// double Dt2 = omp_get_wtime();
-
-    // for (int i = 0; i < cipherText.size(); i++){
-    //     decrypted += dec[i];
-    // }
-
-    // // cout << "Decrypted: " << decrypted << endl;
-	// cout << "Encryption Time taken:" << (Et2 - Et1) << "s" << endl;
-	// cout << "Decryption Time taken:" << (Dt2 - Dt1) << "s" << endl;
+    // cout << result;
+    // cout << endl;
 }
