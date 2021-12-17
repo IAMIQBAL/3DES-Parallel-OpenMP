@@ -112,5 +112,6 @@ int bitRot[16] = { 1, 1, 2, 2,
                     2, 2, 2, 1 };
 
 // Key for encryption
-std::string key = "ABC12532110EDA56";
-// QW4HDDQCRGHM64M6
+std::string Key1 = "C2C12132110EDA91";
+std::string Key2 = "B3C12132110EDB92";
+std::string Key3 = "A1C12132110EDC93";

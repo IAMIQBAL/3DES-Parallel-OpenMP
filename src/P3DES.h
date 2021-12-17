@@ -1,8 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "DES.h"
-#include <omp.h>
+#include "S3DES.h"
 
 using namespace std;
 

@@ -1,8 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "constants.h"
-#include "misc.h"
+#include "DES.h"
 #include <omp.h>
 
 using namespace std;

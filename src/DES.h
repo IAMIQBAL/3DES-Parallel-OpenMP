@@ -1,7 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "SboxParallel.h"
+#include "constants.h"
+#include "misc.h"
 
 using namespace std;
 
