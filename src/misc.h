@@ -3,6 +3,7 @@
 #include <bits/stdc++.h>
 #include <string>
 #include <vector>
+#include <filesystem>
 
 using namespace std;
 
@@ -154,4 +155,13 @@ void printVec(vector<string> vec){
     for (int i = 0; i < vec.size(); i++){
         cout << vec[i] << endl;
     }
+}
+
+double getFileSize(string fName){
+    FILE *file = NULL;
+    file = fopen(fName.c_str(), "rb");
+    fseek(file, 0, SEEK_END);
+    double size = ftell(file);
+    fclose(file);
+    return (size/1000.0);
 }

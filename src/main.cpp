@@ -24,13 +24,14 @@ int main(){
     string k2 = Key2;
     string k3 = Key3;
 
+    vector<string> text = readFile(fName);
+    int size = text.size();
+    string* data = new string[size];
+    for (int i = 0; i < size; i++){
+        data[i] = text[i];
+    }
+
     if (mode == 1){
-        vector<string> text = readFile(fName);
-        int size = text.size();
-        string* data = new string[size];
-        for (int i = 0; i < size; i++){
-            data[i] = text[i];
-        }
 
         LOG("File Read Complete...");
         S3DES *d3 = new S3DES(k1, k2, k3, size);
@@ -53,12 +54,6 @@ int main(){
         // cout << endl;
     } else if (mode == 2){
         int threads = 8;
-        vector<string> text = readFile(fName);
-        int size = text.size();
-        string* data = new string[size];
-        for (int i = 0; i < size; i++){
-            data[i] = text[i];
-        }
 
         LOG("File Read Complete...");
         P3DES *d3 = new P3DES(k1, k2, k3, threads, size, 0);
@@ -81,12 +76,6 @@ int main(){
         // cout << endl;
     } else if (mode == 3){
         int threads = 8;
-        vector<string> text = readFile(fName);
-        int size = text.size();
-        string* data = new string[size];
-        for (int i = 0; i < size; i++){
-            data[i] = text[i];
-        }
 
         LOG("File Read Complete...");
         P3DES *d3 = new P3DES(k1, k2, k3, threads, size, 1);
@@ -109,12 +98,6 @@ int main(){
         cout << endl;
     } else if (mode == 4){
         int threads = 8;
-        vector<string> text = readFile(fName);
-        int size = text.size();
-        string* data = new string[size];
-        for (int i = 0; i < size; i++){
-            data[i] = text[i];
-        }
 
         LOG("File Read Complete...");
         P3DES *d3 = new P3DES(k1, k2, k3, threads, size, 1);

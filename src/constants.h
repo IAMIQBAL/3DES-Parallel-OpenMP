@@ -115,3 +115,5 @@ int bitRot[16] = { 1, 1, 2, 2,
 std::string Key1 = "C2C12132110EDA91";
 std::string Key2 = "B3C12132110EDB92";
 std::string Key3 = "A1C12132110EDC93";
+
+// g++ plot.cpp -std=c++11 -I/usr/include/python3.9/ -lpython3.9
