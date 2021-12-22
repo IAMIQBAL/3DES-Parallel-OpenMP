@@ -21,7 +21,9 @@ private:
     vector<string> genK1;
     vector<string> genK2;
     vector<string> genK3;
-    double encTime;
+    double encTimeParallel;
+    double encTimeSParallel;
+    double encTimeNParallel;
 
 public:
 
@@ -74,7 +76,7 @@ public:
 	    double t2 = omp_get_wtime();
         cout << "Parallel Encryption Time: " << (t2 - t1) << "s" << endl;
 
-        encTime = t2-t1;
+        encTimeParallel = t2-t1;
         return s3;
     }
 
@@ -131,6 +133,7 @@ public:
 	    double t2 = omp_get_wtime();
         cout << "Parallel SBOX Encryption Time: " << (t2 - t1) << "s" << endl;
         
+        encTimeSParallel = t2 - t1;
         return s3;
     }
 
@@ -189,6 +192,8 @@ public:
         }
 	    double t2 = omp_get_wtime();
         cout << "Nested Parallel Encryption Time: " << (t2 - t1) << "s" << endl;
+
+        encTimeNParallel = t2 - t1;
         return s3;
     }
 
@@ -225,7 +230,15 @@ public:
         return s3;
     }
 
-    double getEncTime(){
-        return encTime;
+    double getPEncTime(){
+        return encTimeParallel;
+    }
+
+    double getSEncTime(){
+        return encTimeSParallel;
+    }
+
+    double getNEncTime(){
+        return encTimeNParallel;
     }
 };

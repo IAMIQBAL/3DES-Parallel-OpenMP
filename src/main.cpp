@@ -12,9 +12,17 @@ int main(){
     LOG("3: 3DES Sbox Parallel");
     LOG("4: 3DES Nested Parallelism");
 
-    LOGN("Mode: ")
+    LOGN("Mode: ");
     int mode = 0;
     cin >> mode;
+
+    LOGN("Show Decrypted Output: ");
+    int op = 0;
+    cin >> op;
+
+    LOGN("Threads: ");
+    int threads = 0;
+    cin >> threads;
 
     LOGN("File path: ");
     string fName = "";
@@ -50,10 +58,10 @@ int main(){
         for (int i = 0; i < size; i++){
             result += plain[i];
         }
-        // cout << result;
-        // cout << endl;
+        if (op == 1){
+            LOG(result);
+        }
     } else if (mode == 2){
-        int threads = 8;
 
         LOG("File Read Complete...");
         P3DES *d3 = new P3DES(k1, k2, k3, threads, size, 0);
@@ -72,10 +80,10 @@ int main(){
         for (int i = 0; i < size; i++){
             result += plain[i];
         }
-        // cout << result;
-        // cout << endl;
+        if (op == 1){
+            LOG(result);
+        }
     } else if (mode == 3){
-        int threads = 8;
 
         LOG("File Read Complete...");
         P3DES *d3 = new P3DES(k1, k2, k3, threads, size, 1);
@@ -94,10 +102,10 @@ int main(){
         for (int i = 0; i < size; i++){
             result += plain[i];
         }
-        cout << result;
-        cout << endl;
+        if (op == 1){
+            LOG(result);
+        }
     } else if (mode == 4){
-        int threads = 8;
 
         LOG("File Read Complete...");
         P3DES *d3 = new P3DES(k1, k2, k3, threads, size, 1);
@@ -116,8 +124,9 @@ int main(){
         for (int i = 0; i < size; i++){
             result += plain[i];
         }
-        cout << result;
-        cout << endl;
+        if (op == 1){
+            LOG(result);
+        }
     } else {
         cout << "Something went wrong!" << endl;
     }
