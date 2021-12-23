@@ -123,21 +123,21 @@ speed up for large files because of the thread creation overhead.
 
 ## Using 2 Threads
 <br>
-<img src = "graphs/2Threads.png" raw = true alt="LZW" style="margin-left: 150px; width:400px; height:300px;">
+<img src = "graphs/2Threads.png" raw = true alt="2 Threads" style="margin-left: 150px; width:400px; height:300px;">
 <br>
 
 ## Using 4 Threads
 <br>
-<img src = "graphs/4 Threads.png" raw = true alt="LZW" style="margin-left: 150px;height:300px;">
+<img src = "graphs/4 Threads.png" raw = true alt="4 Threads" style="margin-left: 150px;height:300px;">
 <br>
 
 ## Using 8 Threads
 <br>
-<img src = "graphs/8 Threads.png" raw = true alt="LZW" style="margin-left: 150px;height:300px;">
+<img src = "graphs/8 Threads.png" raw = true alt="8 Threads" style="margin-left: 150px;height:300px;">
 
 ## Serial VS Parallel 8 Threads (Y = Parallel, B = Serial)
 <br>
-<img src = "graphs/8 Threads.png" raw = true alt="LZW" style="margin-left: 150px;height:300px;">
+<img src = "graphs/8 Threads.png" raw = true alt="Serial VS Parallel" style="margin-left: 150px;height:300px;">
 
 <br>
 <br>
